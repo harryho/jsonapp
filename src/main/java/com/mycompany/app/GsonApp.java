@@ -12,7 +12,14 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mycompany.gson.model.*;
-// import com.journaldev.json.model.Employee;
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Vertx;
+import io.vertx.core.http.HttpServer;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.ext.web.Router;
+
+
+
 
 public class GsonApp {
 
@@ -20,10 +27,10 @@ public class GsonApp {
 		Employee emp = createEmployee();
 
 		// Get Gson object
-		Gson gson =   new GsonBuilder().setPrettyPrinting().create();
-	    Path dot =	Paths.get(".");
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Path dot = Paths.get(".");
 		// read JSON file data as String
-		String fileData = new String(Files.readAllBytes(Paths.get("./employee.txt")));
+		String fileData = new String(Files.readAllBytes(Paths.get("./employee.json")));
 
 		// parse json string to object
 		Employee emp1 = gson.fromJson(fileData, Employee.class);
@@ -34,6 +41,35 @@ public class GsonApp {
 		// create JSON String from Object
 		String jsonEmp = gson.toJson(emp);
 		System.out.print(jsonEmp);
+
+		/***************************        Following part is the REST API ******************************/
+		//// It is very similar to nodejs which you have coded before
+		//// I choose Vert.x framework to build this REST API. It is a simple REST framework. 
+		//// You can write Groovy on this framework and you can Groovy manual on their site. 
+
+		System.out.println("\n\n REST API \n\n");
+
+		System.out.println("Server is running on 127.0.0.1:8080 \n\n");
+
+		System.out.println("\n\n You can access the API via browser with following URL: localhost:8080/employee \n\n");
+
+
+		Vertx vertx = Vertx.vertx();
+		HttpServer server = vertx.createHttpServer();
+
+		Router router = Router.router(vertx);
+
+		router.route("/employee").handler(routingContext -> {
+
+			// This handler will be called for every request
+			HttpServerResponse response = routingContext.response();
+			response.setChunked(true);
+			response.putHeader("content-type", "text/json");
+			response.write(jsonEmp).end();
+		
+		});
+
+		server.requestHandler(router::accept).listen(8080);
 
 	}
 
