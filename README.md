@@ -28,6 +28,12 @@ mvn test
 # Development
 mvn exec:java -Dexec.mainClass=com.mycompany.app.GsonApp --quiet
 
+
+# Use two command script to build and run (Windows cmd)
+
+build.cmd
+run.cmd
+
 ```
 
 
