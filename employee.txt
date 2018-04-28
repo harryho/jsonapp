@@ -1,0 +1,23 @@
+{
+  "empID": 1,
+  "name": "James",
+  "permanent": false,
+  "address": {
+    "street": "200 High Street",
+    "city": "Bangalore",
+    "zipcode": 8975
+  },
+  "phoneNumbers": [
+    123456,
+    987654
+  ],
+  "role": "Manager",
+  "cities": [
+    "Sydney",
+    "Brisbane"
+  ],
+  "properties": {
+    "age": "34 years",
+    "salary": "1000 Rs"
+  }
+}
