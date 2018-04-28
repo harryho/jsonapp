@@ -8,8 +8,8 @@ It is a repository of simple java app with Gson
 
 ## Features
 
-* Implement the a simple rpn calculator 
-* Console Application
+* Implement the a simple Gson app
+
 
 
 ## Build & Test
