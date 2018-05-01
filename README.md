@@ -8,7 +8,7 @@ It is a repository of simple java app with Gson
 
 ## Features
 
-* Implement the a simple Gson REST API app
+* Implement the a simple REST API demo built on Gson and Vert.x
 
 
 
